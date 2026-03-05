@@ -1,0 +1,1244 @@
+{
+	"paths": {
+		"/api/calculatedField": {
+			"post": {
+				"tags": ["calculated-field-controller"],
+				"summary": "Create Or Update Calculated Field (saveCalculatedField)",
+				"description": "Creates or Updates the Calculated Field. When creating calculated field, platform generates Calculated Field Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Calculated Field Id will be present in the response. Specify existing Calculated Field Id to update the calculated field. Referencing non-existing Calculated Field Id will cause 'Not Found' error. Remove 'id', 'tenantId' from the request body example (below) to create new Calculated Field entity. \n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority.",
+				"operationId": "saveCalculatedField",
+				"requestBody": {
+					"description": "A JSON value representing the calculated field.",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CalculatedField"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalculatedField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-400": {
+										"summary": "Bad Request",
+										"value": {
+											"status": 400,
+											"message": "Invalid request body",
+											"errorCode": 31,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-401": {
+										"summary": "Unauthorized",
+										"value": {
+											"status": 401,
+											"message": "Authentication failed",
+											"errorCode": 10,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-403": {
+										"summary": "Forbidden",
+										"value": {
+											"status": 403,
+											"message": "You don't have permission to perform this operation!",
+											"errorCode": 20,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-404": {
+										"summary": "Not Found",
+										"value": {
+											"status": 404,
+											"message": "Requested item wasn't found!",
+											"errorCode": 32,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"429": {
+						"description": "Too Many Requests",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-429": {
+										"summary": "Too Many Requests",
+										"value": {
+											"status": 429,
+											"message": "Too many requests for current tenant!",
+											"errorCode": 33,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+					"HTTP login form": ["SYS_ADMIN", "TENANT_ADMIN", "CUSTOMER_USER"]
+				}, {
+					"API key form": ["SYS_ADMIN", "TENANT_ADMIN", "CUSTOMER_USER"]
+				}]
+			}
+		},
+		"/api/calculatedField/{calculatedFieldId}": {
+			"get": {
+				"tags": [
+					"calculated-field-controller"
+				],
+				"summary": "Get Calculated Field (getCalculatedFieldById)",
+				"description": "Fetch the Calculated Field object based on the provided Calculated Field Id.",
+				"operationId": "getCalculatedFieldById",
+				"parameters": [{
+					"name": "calculatedFieldId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalculatedField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-400": {
+										"summary": "Bad Request",
+										"value": {
+											"status": 400,
+											"message": "Invalid UUID string: 123",
+											"errorCode": 31,
+											"timestamp": 1772547709859
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-401": {
+										"summary": "Unauthorized",
+										"value": {
+											"status": 401,
+											"message": "Authentication failed",
+											"errorCode": 10,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-403": {
+										"summary": "Forbidden",
+										"value": {
+											"status": 403,
+											"message": "You don't have permission to perform this operation!",
+											"errorCode": 20,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-404": {
+										"summary": "Not Found",
+										"value": {
+											"status": 404,
+											"message": "Requested item wasn't found!",
+											"errorCode": 32,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"429": {
+						"description": "Too Many Requests",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-429": {
+										"summary": "Too Many Requests",
+										"value": {
+											"status": 429,
+											"message": "Too many requests for current tenant!",
+											"errorCode": 33,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+						"HTTP login form": [
+							"SYS_ADMIN",
+							"TENANT_ADMIN",
+							"CUSTOMER_USER"
+						]
+					},
+					{
+						"API key form": [
+							"SYS_ADMIN",
+							"TENANT_ADMIN",
+							"CUSTOMER_USER"
+						]
+					}
+				]
+			},
+			"delete": {
+				"tags": [
+					"calculated-field-controller"
+				],
+				"summary": "Delete Calculated Field (deleteCalculatedField)",
+				"description": "Deletes the calculated field. Referencing non-existing Calculated Field Id will cause an error.\n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority.",
+				"operationId": "deleteCalculatedField",
+				"parameters": [{
+					"name": "calculatedFieldId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-400": {
+										"summary": "Bad Request",
+										"value": {
+											"status": 400,
+											"message": "Invalid UUID string: 123",
+											"errorCode": 31,
+											"timestamp": 1772547709859
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-401": {
+										"summary": "Unauthorized",
+										"value": {
+											"status": 401,
+											"message": "Authentication failed",
+											"errorCode": 10,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-403": {
+										"summary": "Forbidden",
+										"value": {
+											"status": 403,
+											"message": "You don't have permission to perform this operation!",
+											"errorCode": 20,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-404": {
+										"summary": "Not Found",
+										"value": {
+											"status": 404,
+											"message": "Requested item wasn't found!",
+											"errorCode": 32,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					},
+					"429": {
+						"description": "Too Many Requests",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThingsboardErrorResponse"
+								},
+								"examples": {
+									"error-code-429": {
+										"summary": "Too Many Requests",
+										"value": {
+											"status": 429,
+											"message": "Too many requests for current tenant!",
+											"errorCode": 33,
+											"timestamp": 1772547709861
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [{
+						"HTTP login form": [
+							"SYS_ADMIN",
+							"TENANT_ADMIN",
+							"CUSTOMER_USER"
+						]
+					},
+					{
+						"API key form": [
+							"SYS_ADMIN",
+							"TENANT_ADMIN",
+							"CUSTOMER_USER"
+						]
+					}
+				]
+			}
+		}
+	},
+    "/api/alarm/{alarmId}/ack": {
+      "post": {
+        "tags": [
+          "alarm-controller"
+        ],
+        "summary": "Acknowledge Alarm (ackAlarm)",
+        "description": "Acknowledge the Alarm. Once acknowledged, the 'ack_ts' field will be set to current timestamp and special rule chain event 'ALARM_ACK' will be generated. Referencing non-existing Alarm Id will cause an error.\n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority.",
+        "operationId": "ackAlarm",
+        "parameters": [
+          {
+            "name": "alarmId",
+            "in": "path",
+            "description": "A string value representing the alarm id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlarmInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-400": {
+                    "summary": "Bad Request",
+                    "value": {
+                      "status": 400,
+                      "message": "Invalid request body",
+                      "errorCode": 31,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-401": {
+                    "summary": "Unauthorized",
+                    "value": {
+                      "status": 401,
+                      "message": "Authentication failed",
+                      "errorCode": 10,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-403": {
+                    "summary": "Forbidden",
+                    "value": {
+                      "status": 403,
+                      "message": "You don't have permission to perform this operation!",
+                      "errorCode": 20,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-404": {
+                    "summary": "Not Found",
+                    "value": {
+                      "status": 404,
+                      "message": "Requested item wasn't found!",
+                      "errorCode": 32,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-429": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "status": 429,
+                      "message": "Too many requests for current tenant!",
+                      "errorCode": 33,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTP login form": [
+              "SYS_ADMIN",
+              "TENANT_ADMIN",
+              "CUSTOMER_USER"
+            ]
+          },
+          {
+            "API key form": [
+              "SYS_ADMIN",
+              "TENANT_ADMIN",
+              "CUSTOMER_USER"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/alarm/{alarmId}/clear": {
+      "post": {
+        "tags": [
+          "alarm-controller"
+        ],
+        "summary": "Clear Alarm (clearAlarm)",
+        "description": "Clear the Alarm. Once cleared, the 'clear_ts' field will be set to current timestamp and special rule chain event 'ALARM_CLEAR' will be generated. Referencing non-existing Alarm Id will cause an error.\n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority.",
+        "operationId": "clearAlarm",
+        "parameters": [
+          {
+            "name": "alarmId",
+            "in": "path",
+            "description": "A string value representing the alarm id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlarmInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-400": {
+                    "summary": "Bad Request",
+                    "value": {
+                      "status": 400,
+                      "message": "Invalid request body",
+                      "errorCode": 31,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-401": {
+                    "summary": "Unauthorized",
+                    "value": {
+                      "status": 401,
+                      "message": "Authentication failed",
+                      "errorCode": 10,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-403": {
+                    "summary": "Forbidden",
+                    "value": {
+                      "status": 403,
+                      "message": "You don't have permission to perform this operation!",
+                      "errorCode": 20,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-404": {
+                    "summary": "Not Found",
+                    "value": {
+                      "status": 404,
+                      "message": "Requested item wasn't found!",
+                      "errorCode": 32,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-429": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "status": 429,
+                      "message": "Too many requests for current tenant!",
+                      "errorCode": 33,
+                      "timestamp": 1772547709861
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTP login form": [
+              "SYS_ADMIN",
+              "TENANT_ADMIN",
+              "CUSTOMER_USER"
+            ]
+          },
+          {
+            "API key form": [
+              "SYS_ADMIN",
+              "TENANT_ADMIN",
+              "CUSTOMER_USER"
+            ]
+          }
+        ]
+      }
+    },
+	"components": {
+		"CalculatedField": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/components/schemas/CalculatedFieldId",
+					"description": "JSON object with the Calculated Field Id. Referencing non-existing Calculated Field Id will cause error."
+				},
+				"createdTime": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Timestamp of the calculated field creation, in milliseconds",
+					"example": 1609459200000,
+					"readOnly": true
+				},
+				"tenantId": {
+					"$ref": "#/components/schemas/TenantId"
+				},
+				"entityId": {
+					"$ref": "#/components/schemas/EntityId"
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"SIMPLE",
+						"SCRIPT",
+						"GEOFENCING",
+						"ALARM",
+						"PROPAGATION",
+						"RELATED_ENTITIES_AGGREGATION",
+						"ENTITY_AGGREGATION"
+					]
+				},
+				"name": {
+					"type": "string",
+					"description": "User defined name of the calculated field."
+				},
+				"debugMode": {
+					"type": "boolean",
+					"deprecated": true,
+					"writeOnly": true
+				},
+				"debugSettings": {
+					"$ref": "#/components/schemas/DebugSettings",
+					"description": "Debug settings object."
+				},
+				"configurationVersion": {
+					"type": "integer",
+					"format": "int32",
+					"description": "Version of calculated field configuration.",
+					"example": 0
+				},
+				"configuration": {
+					"$ref": "#/components/schemas/SimpleCalculatedFieldConfiguration"
+				},
+				"version": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"required": [
+				"configuration"
+			]
+		},
+		"RelationPathLevel": {
+			"type": "object",
+			"properties": {
+				"direction": {
+					"type": "string",
+					"enum": [
+						"FROM",
+						"TO"
+					]
+				},
+				"relationType": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": [
+				"direction",
+				"relationType"
+			]
+		},
+		"CfArgumentDynamicSourceConfiguration": {
+			"discriminator": {
+				"propertyName": "type"
+			},
+			"properties": {
+				"type": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"type"
+			]
+		},
+		"RelationPathQueryDynamicSourceConfiguration": {
+			"allOf": [{
+					"$ref": "#/components/schemas/CfArgumentDynamicSourceConfiguration"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"levels": {
+							"type": "array",
+							"items": {
+								"$ref": "#/components/schemas/RelationPathLevel"
+							}
+						}
+					}
+				}
+			]
+		},
+		"CurrentOwnerDynamicSourceConfiguration": {
+			"allOf": [{
+				"$ref": "#/components/schemas/CfArgumentDynamicSourceConfiguration"
+			}]
+		},
+		"ReferencedEntityKey": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"TS_LATEST",
+						"ATTRIBUTE",
+						"TS_ROLLING"
+					]
+				},
+				"scope": {
+					"type": "string",
+					"enum": [
+						"CLIENT_SCOPE",
+						"SERVER_SCOPE",
+						"SHARED_SCOPE"
+					]
+				}
+			}
+		},
+		"Argument": {
+			"type": "object",
+			"properties": {
+				"refEntityId": {
+					"$ref": "#/components/schemas/EntityId"
+				},
+				"refDynamicSourceConfiguration": {
+					"oneOf": [{
+							"$ref": "#/components/schemas/CurrentOwnerDynamicSourceConfiguration"
+						},
+						{
+							"$ref": "#/components/schemas/RelationPathQueryDynamicSourceConfiguration"
+						}
+					]
+				},
+				"refEntityKey": {
+					"$ref": "#/components/schemas/ReferencedEntityKey"
+				},
+				"defaultValue": {
+					"type": "string"
+				},
+				"limit": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"timeWindow": {
+					"type": "integer",
+					"format": "int64"
+				}
+			}
+		},
+		"Output": {
+			"type": "object",
+			"discriminator": {
+				"propertyName": "type"
+			},
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"scope": {
+					"type": "string",
+					"enum": [
+						"CLIENT_SCOPE",
+						"SERVER_SCOPE",
+						"SHARED_SCOPE"
+					]
+				},
+				"strategy": {
+					"$ref": "#/components/schemas/OutputStrategy"
+				},
+				"decimalsByDefault": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"type"
+			]
+		},
+		"OutputStrategy": {
+
+		},
+		"AttributesOutputStrategy": {
+			"discriminator": {
+				"propertyName": "type"
+			},
+			"properties": {
+				"type": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"type"
+			]
+		},
+		"AttributesImmediateOutputStrategy": {
+			"allOf": [{
+					"$ref": "#/components/schemas/AttributesOutputStrategy"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"sendAttributesUpdatedNotification": {
+							"type": "boolean"
+						},
+						"updateAttributesOnlyOnValueChange": {
+							"type": "boolean"
+						},
+						"saveAttribute": {
+							"type": "boolean"
+						},
+						"sendWsUpdate": {
+							"type": "boolean"
+						},
+						"processCfs": {
+							"type": "boolean"
+						}
+					}
+				}
+			]
+		},
+		"AttributesRuleChainOutputStrategy": {
+			"allOf": [{
+				"$ref": "#/components/schemas/AttributesOutputStrategy"
+			}]
+		},
+		"AttributesOutput": {
+			"allOf": [{
+					"$ref": "#/components/schemas/Output"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"strategy": {
+							"oneOf": [{
+									"$ref": "#/components/schemas/AttributesImmediateOutputStrategy"
+								},
+								{
+									"$ref": "#/components/schemas/AttributesRuleChainOutputStrategy"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"TimeSeriesRuleChainOutputStrategy": {
+			"allOf": [{
+				"$ref": "#/components/schemas/TimeSeriesOutputStrategy"
+			}]
+		},
+		"TimeSeriesImmediateOutputStrategy": {
+			"allOf": [{
+					"$ref": "#/components/schemas/TimeSeriesOutputStrategy"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"ttl": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"saveTimeSeries": {
+							"type": "boolean"
+						},
+						"saveLatest": {
+							"type": "boolean"
+						},
+						"sendWsUpdate": {
+							"type": "boolean"
+						},
+						"processCfs": {
+							"type": "boolean"
+						}
+					}
+				}
+			]
+		},
+		"TimeSeriesOutputStrategy": {
+			"discriminator": {
+				"propertyName": "type"
+			},
+			"properties": {
+				"type": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"type"
+			]
+		},
+		"TimeSeriesOutput": {
+			"allOf": [{
+					"$ref": "#/components/schemas/Output"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"strategy": {
+							"oneOf": [{
+									"$ref": "#/components/schemas/TimeSeriesImmediateOutputStrategy"
+								},
+								{
+									"$ref": "#/components/schemas/TimeSeriesRuleChainOutputStrategy"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"SimpleCalculatedFieldConfiguration": {
+			"type": "object",
+			"properties": {
+				"arguments": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/components/schemas/Argument"
+					},
+					"minProperties": 1
+				},
+				"expression": {
+					"type": "string"
+				},
+				"output": {
+					"oneOf": [{
+							"$ref": "#/components/schemas/AttributesOutput"
+						},
+						{
+							"$ref": "#/components/schemas/TimeSeriesOutput"
+						}
+					]
+				},
+				"useLatestTs": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"arguments",
+				"output"
+			]
+		},
+		"ThingsboardErrorResponse": {
+			"properties": {
+				"status": {
+					"type": "integer",
+					"format": "int32",
+					"description": "HTTP Response Status Code",
+					"example": 401,
+					"readOnly": true
+				},
+				"message": {
+					"type": "string",
+					"description": "Error message",
+					"example": "Authentication failed",
+					"readOnly": true
+				},
+				"errorCode": {
+					"type": "integer",
+					"format": "int32",
+					"description": "Platform error code:\n* `2` - General error (HTTP: 500 - Internal Server Error)\n\n* `10` - Authentication failed (HTTP: 401 - Unauthorized)\n\n* `11` - JWT token expired (HTTP: 401 - Unauthorized)\n\n* `15` - Credentials expired (HTTP: 401 - Unauthorized)\n\n* `20` - Permission denied (HTTP: 403 - Forbidden)\n\n* `30` - Invalid arguments (HTTP: 400 - Bad Request)\n\n* `31` - Bad request params (HTTP: 400 - Bad Request)\n\n* `32` - Item not found (HTTP: 404 - Not Found)\n\n* `33` - Too many requests (HTTP: 429 - Too Many Requests)\n\n* `34` - Too many updates (Too many updates over Websocket session)\n\n* `40` - Subscription violation (HTTP: 403 - Forbidden)\n\n* `41` - Entities limit exceeded (HTTP: 403 - Forbidden)",
+					"example": 10,
+					"readOnly": true
+				},
+				"timestamp": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Timestamp",
+					"readOnly": true
+				}
+			}
+		},
+		"TenantId": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid",
+					"description": "ID of the entity, time-based UUID v1",
+					"example": "784f394c-42b6-435a-983c-b7beff2784f9"
+				},
+				"entityType": {
+					"type": "string",
+					"description": "string",
+					"enum": [
+						"TENANT"
+					],
+					"example": "TENANT"
+				}
+			},
+			"required": [
+				"entityType",
+				"id"
+			]
+		},
+		"EntityId": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid",
+					"description": "ID of the entity, time-based UUID v1",
+					"example": "784f394c-42b6-435a-983c-b7beff2784f9"
+				},
+				"entityType": {
+					"type": "string",
+					"enum": [
+						"TENANT",
+						"CUSTOMER",
+						"USER",
+						"DASHBOARD",
+						"ASSET",
+						"DEVICE",
+						"ALARM",
+						"RULE_CHAIN",
+						"RULE_NODE",
+						"ENTITY_VIEW",
+						"WIDGETS_BUNDLE",
+						"WIDGET_TYPE",
+						"TENANT_PROFILE",
+						"DEVICE_PROFILE",
+						"ASSET_PROFILE",
+						"API_USAGE_STATE",
+						"TB_RESOURCE",
+						"OTA_PACKAGE",
+						"EDGE",
+						"RPC",
+						"QUEUE",
+						"NOTIFICATION_TARGET",
+						"NOTIFICATION_TEMPLATE",
+						"NOTIFICATION_REQUEST",
+						"NOTIFICATION",
+						"NOTIFICATION_RULE",
+						"QUEUE_STATS",
+						"OAUTH2_CLIENT",
+						"DOMAIN",
+						"MOBILE_APP",
+						"MOBILE_APP_BUNDLE",
+						"CALCULATED_FIELD",
+						"JOB",
+						"ADMIN_SETTINGS",
+						"AI_MODEL",
+						"API_KEY"
+					],
+					"example": "DEVICE"
+				}
+			},
+			"required": [
+				"entityType",
+				"id"
+			]
+		},
+		"DebugSettings": {
+			"type": "object",
+			"properties": {
+				"failuresEnabled": {
+					"type": "boolean",
+					"description": "Debug failures. ",
+					"example": false
+				},
+				"allEnabled": {
+					"type": "boolean",
+					"description": "Debug All. Used as a trigger for updating debugAllUntil.",
+					"example": false
+				},
+				"allEnabledUntil": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Timestamp of the end time for the processing debug events."
+				}
+			}
+		}
+	}
+}
